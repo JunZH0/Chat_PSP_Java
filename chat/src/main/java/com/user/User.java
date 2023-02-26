@@ -1,4 +1,4 @@
-package com.chat.user;
+package com.user;
 
 import java.io.PrintWriter;
 import java.net.Socket;
