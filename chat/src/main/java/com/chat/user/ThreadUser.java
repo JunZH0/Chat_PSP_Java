@@ -1,4 +1,4 @@
-package com.user;
+package com.chat.user;
 
 import java.io.BufferedReader;
 import java.io.IOException;
