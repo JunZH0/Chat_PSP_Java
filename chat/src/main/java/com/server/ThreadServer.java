@@ -1,14 +1,12 @@
 package com.server;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.Socket;
 import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ThreadServer extends Thread{
+public class ThreadServer extends Thread {
     private Socket socket;
     private ArrayList<Socket> usuarios;
     private HashMap<Socket, String> listNomUsu;
