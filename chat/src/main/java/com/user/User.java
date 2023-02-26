@@ -27,11 +27,21 @@ public class User {
                     out.println("cerrar sesión");
                     break;
                 }
-                out.println(message + res);
-            }
-            while (!res.equals("cerrar sesión"));
-        }
-        catch (Exception e) {
+                // Check if the message is a whisper by looking for the syntax "/w recipient message"
+                if (res.startsWith("/w ")) {
+                    int spaceIndex = res.indexOf(' ', 3);
+                    if (spaceIndex != -1) {
+                        String recipient = res.substring(3, spaceIndex);
+                        String whisperMessage = res.substring(spaceIndex + 1);
+                        out.println("(whisper to " + recipient + ") " + message + whisperMessage);
+                    } else {
+                        System.out.println("Invalid whisper syntax. Usage: /w recipient message");
+                    }
+                } else {
+                    out.println(message + res);
+                }
+            } while (!res.equals("cerrar sesión"));
+        } catch (Exception e) {
             System.out.println(e.getStackTrace());
         }
     }
