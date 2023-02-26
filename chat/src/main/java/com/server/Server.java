@@ -8,7 +8,7 @@ import java.util.HashMap;
 public class Server {
     public static void main(String[] args) {
         ArrayList<Socket> clients = new ArrayList<>();
-        HashMap<Socket, String> clientNameList = new HashMap<Socket, String>();
+        HashMap<Socket, String> clientNameList = new HashMap<>();
         try (ServerSocket serversocket = new ServerSocket(5000)) {
             System.out.println("Servidor iniciado...");
             while (true) {
@@ -17,7 +17,8 @@ public class Server {
                 ThreadServer ThreadServer = new ThreadServer(socket, clients, clientNameList);
                 ThreadServer.start();
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             System.out.println(e.getStackTrace());
         }
     }
