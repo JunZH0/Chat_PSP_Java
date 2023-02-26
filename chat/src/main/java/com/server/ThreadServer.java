@@ -45,7 +45,8 @@ public class ThreadServer extends Thread {
             mostrarMensaje(socket, printMessage);
             usuarios.remove(socket);
             listNomUsu.remove(socket);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             System.out.println(e.getStackTrace());
         }
     }
@@ -62,7 +63,8 @@ public class ThreadServer extends Thread {
                     printWriter = new PrintWriter(socket.getOutputStream(), true);
                     printWriter.println(outputString);
                 }
-            } catch (IOException ex) {
+            }
+            catch (IOException ex) {
                 System.out.println(ex);
             }
         }
