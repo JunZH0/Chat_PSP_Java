@@ -1,44 +1,49 @@
 package com.main;
+
+import com.controller.ChatController;
+import com.controller.DialogController;
 import com.user.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        // Load the FXML file
-        Parent root = FXMLLoader.load(getClass().getResource("Dialog.fxml"));
+    public void start(Stage primaryStage) throws Exception{
+        // Load dialog FXML file
+        FXMLLoader dialogLoader = new FXMLLoader(getClass().getResource("Dialog.fxml"));
+        Parent dialogRoot = dialogLoader.load();
+        DialogController dialogController = dialogLoader.getController();
 
-        // Get references to the name field and connect button
-        TextField nameField = (TextField) root.lookup("#nameField");
-        Button connectButton = (Button) root.lookup("#connectButton");
+        // Create dialog stage
+        Stage dialogStage = new Stage();
+        dialogStage.initModality(Modality.APPLICATION_MODAL);
+        dialogStage.setScene(new Scene(dialogRoot));
+        dialogStage.showAndWait();
 
-        // Set the action for the connect button
-        connectButton.setOnAction(event -> {
-            // Get the user's name from the name field
-            String name = nameField.getText();
+        // Retrieve user name from dialog controller
+        String userName = dialogController.getUserName();
 
-            // Pass the user's name to the User class
-            User.main(new String[]{name});
+        // Load chat window FXML file
+        FXMLLoader chatLoader = new FXMLLoader(getClass().getResource("Chat.fxml"));
+        Parent chatRoot = chatLoader.load();
+        ChatController chatController = chatLoader.getController();
 
-            // Close the UI
-            primaryStage.close();
-        });
+        // Create chat stage
+        Stage chatStage = new Stage();
+        chatStage.setScene(new Scene(chatRoot));
+        chatStage.show();
 
-        // Create the scene and set the root node
-        Scene scene = new Scene(root);
+        // Pass user name to User class
+        User user = new User(userName);
 
-        // Set the scene on the stage and show it
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        // Set chat controller and initialize chat
+        chatController.setUser(user);
+        chatController.initialize();
     }
 
     public static void main(String[] args) {

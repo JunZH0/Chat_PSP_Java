@@ -5,6 +5,9 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class User {
+    public User(String userName) {
+    }
+
     public static void main(String[] args) {
         String nom;
         String res;
@@ -44,5 +47,13 @@ public class User {
         } catch (Exception e) {
             System.out.println(e.getStackTrace());
         }
+    }
+
+    public void sendMessage(String message) {
+        System.out.println(message);
+    }
+
+    public void close() {
+        System.out.println("Sesión cerrada");
     }
 }

@@ -11,26 +11,18 @@ public class DialogController {
     private TextField nameField;
 
     @FXML
-    private Button connectButton;
+    private Button okButton;
 
-    private Stage dialogStage;
     private String userName;
-
-    public void setDialogStage(Stage dialogStage) {
-        this.dialogStage = dialogStage;
-    }
 
     public String getUserName() {
         return userName;
     }
 
     @FXML
-    private void handleConnect() {
-        String name = nameField.getText();
-        if (name != null && !name.trim().isEmpty()) {
-            userName = name;
-            dialogStage.close();
-        }
+    private void handleOkButton() {
+        userName = nameField.getText();
+        Stage stage = (Stage) okButton.getScene().getWindow();
+        stage.close();
     }
-
 }
